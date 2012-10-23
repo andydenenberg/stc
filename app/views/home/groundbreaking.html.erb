@@ -1,0 +1,33 @@
+<style>
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+<br>
+<div class='row center'>
+	<div class='span12'>
+		<h3>Groundbreaking Ceremony</h3>
+		<b>Sunday, September 22, 2012</b><br>
+	<% pix = Dir.glob("app/assets/images/groundbreaking/*") %>
+	<% thumbs = pix.select { |i| i =~ /_s.jpg/} %>
+	<% rows = thumbs.in_groups_of(5) %>
+	<% rows.each do |pix| %>
+		<% pix.each do |pic| %>
+			<%= link_to image_tag(pic.to_s.gsub('app/assets/images/', ''), :class => "img-polaroid" ), 
+			 	image_path( pic.to_s.gsub('app/assets/images/', '').gsub('_s.jpg', '.jpg') ), 
+			 :target => '_blank' if !pic.nil? %>
+		<% end %>
+		<br>
+	<% end %>
+	
+	</div>
+</div>
+
+<div class="bs-docs-example">
+  <p class="muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+  <p class="btn-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+  <p class="text-error">Donec ullamcorper nulla non metus auctor fringilla.</p>
+  <p class="text-info">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis.</p>
+  <p class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+</div>
