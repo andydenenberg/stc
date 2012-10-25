@@ -11,7 +11,6 @@ role :db,  "stc.ospreypointcap.com"
 
 set :user, "ubuntu"
 set :deploy_to, "/home/ubuntu/rails/#{application}"
-
 set :keep_releases, 5
 
 # if you want to clean up old releases on each deploy uncomment this:

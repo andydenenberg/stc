@@ -1,28 +1,16 @@
-<%= link_to "Stand Tall Campaign for Bright Kids", root_path, :class => 'brand' %>
-<ul class="nav">
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
-    </li>
-  <% else %>
-    <li>
-    <%= link_to 'Login', new_user_session_path %>  
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Edit account', edit_user_registration_path %>
-    </li>
-    <% if current_user.has_role? :admin %>
-      <li>
-      <%= link_to 'Admin', users_path %>
-      </li>
-    <% end %>
-  <% else %>
-    <li>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    </li>
-  <% end %>
+<%= link_to "Stand Tall Campaign", root_path, :class => 'brand' %>
+
+<ul class='nav'>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Schools<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><%= link_to 'The Sonia Shankman Orthogenics School', home_start_path %></li>
+      <li><%= link_to 'The Hyde Park Day School', home_start_path %></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class='nav'>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">The Campaign<b class="caret"></b></a>
     <ul class="dropdown-menu">
@@ -30,14 +18,47 @@
       <li class="divider"></li>
       <li class="nav-header">New Campus Info</li>
       <li><%= link_to 'Groundbreaking Ceremony', home_groundbreaking_path %></li>
+      <li><%= link_to 'Events', events_path %></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class='nav'>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Get Involved<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><%= link_to 'Make a Contribution', donate_path %></li>
+      <li class="divider"></li>
+      <li class="nav-header">New Campus Info</li>
+      <li><%= link_to 'Groundbreaking Ceremony', home_groundbreaking_path %></li>
       <li><a href="#">One more separated link</a></li>
     </ul>
   </li>
+</ul>
 
+
+<ul class="nav pull-right">
+  <% if user_signed_in? %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+	    <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+      	<li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+	    <% if current_user.has_role? :admin %>
+	      <li><%= link_to 'Admin', users_path %></li>
+	    <% end %>
+      <li class="divider"></li>
+      <li class="nav-header">New Campus Info</li>
+      <li><%= link_to 'Groundbreaking Ceremony', home_groundbreaking_path %></li>
+    </ul>
+  </li>
+  <% else %>
+    <li><%= link_to 'Login', new_user_session_path %></li>
+  <% end %>
 </ul>
 
 <form  class="navbar-form pull-right" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="PEH56KZ97GV4G">
-<button class='btn'>Donate via Paypal</button>
+<button class='btn'>Donate now</button>
 </form>
