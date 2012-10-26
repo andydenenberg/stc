@@ -1,7 +1,8 @@
 <style>
 .modal {
-    width: 440px;
-    margin-left: -220px; /* - width/2 */
+    width: 600px;
+	height: 500px;
+    margin-left: -300px; /* - width/2 */
 }
 </style>
 
@@ -27,9 +28,8 @@
 						<% else %>
 						<% clas = 'item' %>
 						<% end %>
-				        <div class="<%= clas %>"><%= image_tag(pix.to_s.gsub('app/assets/images/', '').gsub('_s.jpg', '.jpg'), :class => "img-polaroid", :size => '400x300' ) %>
+				        <div class="<%= clas %>"><%= image_tag(pix.to_s.gsub('app/assets/images/', '').gsub('_s.jpg', '.jpg'), :class => "img-polaroid", :size => '600x450' ) %>
 							<div class="carousel-caption">
-								<h4>Second Thumbnail label</h4>
 								<p>September 22, 2012</p>
 							</div>
 						</div> 
@@ -62,7 +62,7 @@
 		<b>Sunday, September 22, 2012</b><br>
 	<% pix = Dir.glob("app/assets/images/groundbreaking/*") %>
 	<% thumbs = pix.select { |i| i =~ /_s.jpg/} %>
-	<% rows = thumbs.in_groups_of(5) %>
+	<% rows = thumbs.in_groups_of(4) %>
 	<% rows.each do |pix| %>
 		<% pix.each do |pic| %>
 			<%= link_to image_tag(pic.to_s.gsub('app/assets/images/', ''), :class => "img-polaroid" ), 
