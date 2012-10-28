@@ -1,6 +1,7 @@
 Stc::Application.routes.draw do
   authenticated :user do
-    root :to => 'home#index'
+#    root :to => 'home#index'
+    root :to => 'home#start'
   end
   root :to => "home#welcome"
   devise_for :users
@@ -12,7 +13,7 @@ Stc::Application.routes.draw do
   get 'home/events' => 'home#events', :as => :events
   get 'home/donate' => 'home#donate', :as => :donate
   
-  get 'home/start'
-  get 'home/groundbreaking'
+  get 'home/start' => 'home#start', :as => :start
+  get 'home/groundbreaking' => 'home#groundbreaking', :as => :groundbreaking
 
 end

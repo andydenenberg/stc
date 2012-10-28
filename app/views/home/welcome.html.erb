@@ -1,25 +1,52 @@
+<script>
+$(function() {
+    $('#myCarousel').carousel({
+       interval: 8000
+    });
+});
+</script>
+<br>
+<div class'row'>
+	<div class='span4'>
 
-<div class='row'>
-	<div class='span8 offset1'>
-		<%= image_tag('StandTallBanner.png', :size => '500x148') %>
+		   <div id="myCarousel" class="carousel slide">  
+		     <!-- Carousel items -->  
+			   <div class="carousel-inner">  
+				<% thumbs = [ 'groundbreaking/IMG_7682.jpg', 'groundbreaking/IMG_7697.jpg', 'groundbreaking/IMG_7434.jpg'] %>
+				<% thumbs.each_with_index do |pix,i| %>
+					<% if i == 0 %>
+					<% clas = 'item active' %>
+					<% else %>
+					<% clas = 'item' %>
+					<% end %>
+			        <div class="<%= clas %>"><%= image_tag(pix, :class => "img-polaroid", :size => '300x4500' ) %>
+					</div> 
+		 		<% end %>
+			  </div>  
+		  <!-- Carousel nav -->  
+			</div>
 	</div>
-</div>
-<div class='row'>
-	<div class='span6 offset1 double_space'>
-<p>Please join me in supporting Stand Tall: The Campaign for a Bright Kids’ Campus. &nbsp;&nbsp; Together we can transform the lives of countless students and families, as well as the Woodlawn community. &nbsp;&nbsp; 
+	<div class='span6'>		
+<table  style='margin: auto;'>
+	<tr>
+		<td>
+				<%= image_tag('StandTallBanner.png', :size => '500x148') %>
+	  			<div class='double_space span8'>		
+				<p style='font-size: 16px;font-weight: 200;'>
+					<br>Please join me in supporting Stand Tall: The Campaign for a Bright Kids’ Campus. &nbsp;&nbsp; Together we can transform the lives of countless students and families, as well as the Woodlawn community. &nbsp;&nbsp; <br><br>
 Explore this site to learn more about how our campaign will change the lives of young people who would otherwise have nowhere to turn…  &nbsp;&nbsp; how our new campus will meet the distinct needs of our students and families…  &nbsp;&nbsp; how our Woodlawn neighbors have become our Woodlawn partners…  &nbsp;&nbsp; and how you can help our Schools thrive during this very exciting time.</p>
-	</div>
-	<br>
-
-	<div class='span5 offset1 double_space'>
-		<b>Joanne Steinback<b><br>
-			<em>Campaign Chair and Board Member</em>
-		<br><br>
-		<%= link_to 'Enter Site and Learn more', home_start_path, :class => 'btn btn-success' %>
-		
+<b>Joanne Steinback<b><br>
+	<em>Campaign Chair and Board Member</em>
+<br><br>
+			</div>
+<%= link_to 'Enter Site and Learn more', home_start_path, :class => 'btn btn-success btn-large' %>
+<br><br>
+</td>
+	</tr>
+</table>
 	</div>
 </div>
+<br>
+<br>
+<br>
 
-<br>
-<br>
-<br>
