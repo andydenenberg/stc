@@ -12,6 +12,7 @@ Stc::Application.routes.draw do
   get 'home/news' => 'home#news', :as => :news
   get 'home/events' => 'home#events', :as => :events
   get 'home/donate' => 'home#donate', :as => :donate
+  get 'home/reference' => 'home/reference', :as => :reference
   
   get 'home/start' => 'home#start', :as => :start
   get 'home/groundbreaking' => 'home#groundbreaking', :as => :groundbreaking
