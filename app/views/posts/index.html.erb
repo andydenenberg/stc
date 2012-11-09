@@ -1,0 +1,26 @@
+<h3>Discussion</h3>
+
+<table class='table table-striped table-bordered'>
+  <thead>
+	<tr>
+    <th>Title</th>
+    <th>Message</th>
+    <th>Created by</th>
+	<th>Comments</th>
+  </tr>
+ </thead>
+
+<% @posts.each do |post| %>
+  <tr>
+	<% post.body.length > 50 ? body = post.body[0..50] + '...' : body = post.body %>
+    <td><%= link_to post.title, post %></td>
+    <td><%= link_to body, post %></td>
+    <td><b><%= User.find(post.user_id).name %></b> | on <%= post.created_at.strftime('%b %d, %Y') %></td>
+	<td><%= post.comments.count %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>

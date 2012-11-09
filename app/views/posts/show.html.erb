@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+function AddComment( ) {
+    // make a GET call and replace the contents
+   Post = <%= @post.id %> ; // document.getElementById('marker').value ;
+    $.get('<%= add_comment_posts_path %>', 
+          { post:Post },         
+          function(data) {
+            $("#comment").html(data);
+          });
+  }
+		
+</script>
+
+
+
+<%= render 'show' %>
+
+<div id='comment'></div>
+
+<%= render 'comments'%>
+
+<%= link_to 'Discussion Home', posts_path , :class => 'btn btn-mini' %>
+<%= %>

@@ -1,0 +1,14 @@
+<%= simple_form_for(@comment, :html => { :class => 'form-vertical' } ) do |f| %>
+
+  <div class="form-inputs">
+	<label for="stackedSelect">New Comment</label>
+    <%= f.text_area :note , :class => "input textarea span5", :rows => 5  %>
+	<%= f.hidden_field :post_id , :value => @post.id %>
+	<%= f.hidden_field :user_id , :value => @user.id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+	<%= link_to 'Cancel' , :back %>
+  </div>
+<% end %>

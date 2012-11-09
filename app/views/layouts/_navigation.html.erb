@@ -22,6 +22,7 @@
       <li class="nav-header">New Campus Info</li>
       <li><%= link_to 'Groundbreaking Ceremony', groundbreaking_path %></li>
       <li><%= link_to 'Events', events_path %></li>
+	  <li><%= link_to 'Reference', reference_path %></li>
     </ul>
   </li>
 </ul>
@@ -30,11 +31,11 @@
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Get Involved <b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><%= link_to 'Make a Contribution', donate_path %></li>
+      <li class="nav-header">Collaboration</li>
+      <li><%= link_to 'Discussion and Messages', posts_path %></li>
       <li class="divider"></li>
-      <li class="nav-header">New Campus Info</li>
-      <li><%= link_to 'Groundbreaking Ceremony', groundbreaking_path %></li>
-      <li><a href="#">One more separated link</a></li>
+      <li class="nav-header">Benefit Activities</li>
+      <li><%= link_to 'Make a Contribution', donate_path %></li>
     </ul>
   </li>
 </ul>
