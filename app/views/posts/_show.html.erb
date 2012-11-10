@@ -15,5 +15,14 @@ Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.
 
 </blockquote>
 
+<% @post.attachments.each do |attach| %>
+<%= link_to attach.url, 'http://' + attach.url %><br>
+<% end %>
+
+<% @post.attachments.each do |attach| %>
+<%= attach.image_file_name %><br>
+<%= image_tag attach.image.url %> %><br>
+<% end %>
+
 <hr>
 

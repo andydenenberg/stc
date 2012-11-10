@@ -1,4 +1,6 @@
 Stc::Application.routes.draw do
+  resources :attachments
+
   resources :comments do
     member do
       get 'modify'
@@ -8,6 +10,7 @@ Stc::Application.routes.draw do
   resources :posts do
     collection do
       get 'add_comment'
+      get 'add_attachment'
     end
   end
   

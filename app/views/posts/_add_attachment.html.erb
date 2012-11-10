@@ -1,0 +1,14 @@
+<%= simple_form_for(@attachment, :html => { :class => 'form-vertical', :multipart => true } ) do |f| %>
+
+  <div class="form-inputs">
+	<label for="stackedSelect">New Attachment</label>
+    <%= f.input :url %>
+	<%= f.file_field :image %>
+	<%= f.hidden_field :post_id , :value => @post.id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+	<%= link_to 'Cancel' , :back %>
+  </div>
+<% end %>

@@ -9,16 +9,26 @@ function AddComment( ) {
             $("#comment").html(data);
           });
   }
+
+function AddAttachment( ) {
+    // make a GET call and replace the contents
+   Post = <%= @post.id %> ; // document.getElementById('marker').value ;
+    $.get('<%= add_attachment_posts_path %>', 
+          { post:Post },         
+          function(data) {
+            $("#attachment").html(data);
+          });
+  }
 		
 </script>
 
-
+<%= link_to 'Discussion Home', posts_path , :class => 'btn btn-mini' %>
 
 <%= render 'show' %>
 
 <div id='comment'></div>
+<div id='attachment'></div>
 
 <%= render 'comments'%>
 
 <%= link_to 'Discussion Home', posts_path , :class => 'btn btn-mini' %>
-<%= %>

@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  # GET /comments
-  # GET /comments.json
+  before_filter :authenticate_user!
+
   def index
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comments = Comment.all
 
     respond_to do |format|
@@ -13,6 +14,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +26,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.new
 
     respond_to do |format|
@@ -34,10 +37,12 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.find(params[:id])
   end
   
   def modify
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.find(params[:id])    
     @post = Post.find(@comment.post_id)
   end
@@ -45,6 +50,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.new(params[:comment])
     @post = Post.find(params[:comment][:post_id])
     @comment.save
@@ -65,6 +71,7 @@ class CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.json
   def update
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.find(params[:id])
     @post = Post.find(@comment.post_id)
     @comment.update_attributes(params[:comment])
@@ -84,6 +91,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @comment = Comment.find(params[:id])
     @post = Post.find(@comment.post_id)
     @comment.destroy
