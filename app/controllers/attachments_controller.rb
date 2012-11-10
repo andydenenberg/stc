@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
-  # GET /attachments
-  # GET /attachments.json
+  before_filter :authenticate_user!
+
   def index
     @attachments = Attachment.all
 

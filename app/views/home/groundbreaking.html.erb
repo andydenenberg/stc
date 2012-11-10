@@ -47,19 +47,16 @@
               <button class="btn" data-dismiss="modal">Close</button>
             </div>
           </div>
-          <div class="bs-docs-example" style="padding-bottom: 24px;">
-            <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Ground Breaking Ceremony Pictures</a>
-          </div>
 
 
-
-
-
-<br>
 <div class='row center_images'>
 	<div class='span12'>
 		<h3>Groundbreaking Ceremony</h3>
-		<b>Sunday, September 22, 2012</b><br>
+		<div class="bs-docs-example" style="padding-bottom: 24px;">
+          <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Slide Show</a>
+        </div>
+        
+		<b>Sunday, September 22, 2012</b><br><br>
 	<% pix = Dir.glob("app/assets/images/groundbreaking/*") %>
 	<% thumbs = pix.select { |i| i =~ /_s.jpg/} %>
 	<% rows = thumbs.in_groups_of(4) %>

@@ -1,5 +1,7 @@
 <%= link_to 'Stand Tall', start_path, :class => 'brand' %>
 
+<% if user_signed_in? %>
+
 <ul class='nav'>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Schools <b class="caret"></b></a>
@@ -40,6 +42,7 @@
   </li>
 </ul>
 
+<% end %>
 
 <ul class="nav pull-right">
   <% if user_signed_in? %>
@@ -51,9 +54,6 @@
 	    <% if current_user.has_role? :admin %>
 	      <li><%= link_to 'Admin', users_path %></li>
 	    <% end %>
-      <li class="divider"></li>
-      <li class="nav-header">New Campus Info</li>
-      <li><%= link_to 'Groundbreaking Ceremony', groundbreaking_path %></li>
     </ul>
   </li>
   <% else %>
@@ -61,8 +61,3 @@
   <% end %>
 </ul>
 
-<form  class="navbar-form pull-right" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="PEH56KZ97GV4G">
-<button class='btn'>Donate now</button>
-</form>
