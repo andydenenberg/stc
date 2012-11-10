@@ -1,11 +1,24 @@
-<%= simple_form_for(@attachment, :html => { :class => 'form-vertical', :multipart => true } ) do |f| %>
+<%= simple_form_for(@attachment, :html => { :class => 'form-horizontal', :multipart => true } ) do |f| %>
 
-  <div class="form-inputs">
-	<label for="stackedSelect">New Attachment</label>
-    <%= f.input :url %>
-	<%= f.file_field :image %>
+<fieldset>
+	<legend>New Attachment</legend>
+    
+	<div class="form-inputs">
+	  <div class="control-group">
+	    <label class="control-label">URL</label>
+	    <div class="controls">
+    		<%= f.text_field :url %>
+	  </div></div>
+	
+	  <div class="control-group">
+	    <label class="control-label">File or Image</label>
+	    <div class="controls">
+			<%= f.file_field :image %>
+	  </div></div>
+		
 	<%= f.hidden_field :post_id , :value => @post.id %>
   </div>
+</fieldset>
 
   <div class="form-actions">
     <%= f.button :submit %>

@@ -7,7 +7,7 @@
 	<label for="stackedSelect">Message</label>
     <%= f.text_area :body , :class => "input textarea span8", :rows => 5  %>
 	<label for="stackedSelect">Created by</label>
-	<%= f.select :user_id , User.all.collect { |u|  [ u.name, u.id ] } %>
+	<%= f.select :user_id , User.all.collect { |u|  [ u.name, u.id ] }, :selected => current_user.id %>
   </div>
 
   <div class="form-actions">

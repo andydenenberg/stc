@@ -1,5 +1,5 @@
 Stc::Application.routes.draw do
-  resources :attachments
+  resources :attachments 
 
   resources :comments do
     member do
@@ -14,7 +14,6 @@ Stc::Application.routes.draw do
     end
   end
   
-
   authenticated :user do
 #    root :to => 'home#index'
     root :to => 'home#start'

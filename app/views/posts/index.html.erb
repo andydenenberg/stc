@@ -7,6 +7,8 @@
     <th>Message</th>
     <th>Created by</th>
 	<th>Comments</th>
+	<th>URLs</th>
+	<th>Files</th>
   </tr>
  </thead>
 
@@ -17,6 +19,8 @@
     <td><%= link_to body, post %></td>
     <td><b><%= User.find(post.user_id).name %></b> | on <%= post.created_at.strftime('%b %d, %Y') %></td>
 	<td><%= post.comments.count %></td>
+	<td><%= post.attachments.collect { |a| a.url }.compact.count %></td>
+	<td><%= post.attachments.collect { |a| a.image_file_name }.compact.count %></td>
   </tr>
 <% end %>
 </table>

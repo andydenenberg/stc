@@ -1,28 +1,60 @@
 
 <h3><%= @post.title %></h3>
 
-<p>
-<pre style='font-size:16px;background:white;'>  <%= @post.body %></pre>
-</p>
-
-<blockquote>
-Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.strftime('%b %d, %Y') %>
-	<% if current_user.id == @post.user_id %> | 
-		<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini' %> |
-		<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
+<pre style='font-size:16px;background:white;'>
+<%= @post.body %>
+</pre>
+<% if @post.attachments.collect { |a| a.url }.compact.reject { |b| b.length == 0 }.count > 0 %>
+Links:
+<ul>
+	<% @post.attachments.each do |attach| %>
+	<% if !attach.url.blank? %>
+	<li><code><%= link_to attach.url, 'http://' + attach.url , :target => '_blank' %></code> | 
+		<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 	<% end %>
-</td>
-
-</blockquote>
-
-<% @post.attachments.each do |attach| %>
-<%= link_to attach.url, 'http://' + attach.url %><br>
+	<% end %>
+</ul>
+<br>
 <% end %>
 
-<% @post.attachments.each do |attach| %>
-<%= attach.image_file_name %><br>
-<%= image_tag attach.image.url %> %><br>
+<% if @post.attachments.collect { |a| a.image_file_name }.compact.count > 0 %>
+Files:
+<ul>
+	<% @post.attachments.each do |attach| %>
+		<% if !attach.image_file_name.nil? and !attach.image_content_type.include?('image') %>	
+			<li>
+				<code><%= link_to attach.image_file_name, attach.image.url, :target => '_blank' %></code>
+				<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
 <% end %>
 
-<hr>
+<br>
+<% if @post.attachments.collect { |a| a.image_file_name }.compact.count > 0 %>
+Images:
+<ul>
+	<% @post.attachments.each do |attach| %>
+		<% if !attach.image_file_name.nil? and attach.image_content_type.include?('image') %>	
+			<li>
+				<%= link_to image_tag( attach.image.url(:thumb) ), attach.image.url, :class => "img-polaroid", :target => '_blank' %>
+			<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+<% end %>
+
+
+<div class='row pull-right'>
+Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.strftime('%b %d, %Y') %>
+	<% if current_user.id == @post.user_id %>
+	<%= link_to_function 'Add Attachment', "AddAttachment(); return false", :class => 'btn btn-primary btn-mini' %> | 
+	<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini' %> |
+	<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
+	<% end %>
+</div>
+<br>
+
 
