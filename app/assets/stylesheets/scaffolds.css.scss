@@ -1,3 +1,12 @@
+.center_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center_text {
+text-align: center
+}
+
 .blank_box {
   position: relative;
   margin: 15px 0;
@@ -14,8 +23,7 @@
 .attachment_box {
   position: relative;
   margin: 15px 0;
-  padding: 39px 19px 14px;
-  *padding-top: 19px;
+  padding: 18px 15px 14px;
   background-color: #fff;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -32,7 +40,7 @@
 .destroy_butt {
   position: absolute;
   top: -1px;
-  left: 40px;
+  left: 39px;
 }
 .file_butt {
   position: absolute;
