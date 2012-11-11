@@ -1,11 +1,11 @@
-<%= simple_form_for(@post, :html => { :class => 'form-vertical' } ) do |f| %>
+<%= simple_form_for(@post, :html => { :class => 'form-vertical span9' } ) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
 	<label for="stackedSelect">Title</label>
     <%= f.text_field :title  , :class => "span8" %>
 	<label for="stackedSelect">Message</label>
-    <%= f.text_area :body , :class => "input textarea span8", :rows => 5  %>
+    <%= f.text_area :body , :class => "input textarea span8", :rows => 15  %>
 	<label for="stackedSelect">Created by</label>
 	<%= f.select :user_id , User.all.collect { |u|  [ u.name, u.id ] }, :selected => current_user.id %>
   </div>
