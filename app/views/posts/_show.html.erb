@@ -8,7 +8,7 @@
 		<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning destroy_butt' %>
 		<% end %>
 	    <h3><%= @post.title %></h3>
-	    <p class="lead"><%= @post.body %></p>
+	    <p class="lead"><%= @post.body.html_safe %></p>
 	</div>	
 	
 
