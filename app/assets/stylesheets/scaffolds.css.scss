@@ -1,3 +1,50 @@
+.blank_box {
+  position: relative;
+  margin: 15px 0;
+  padding: 19px 19px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+
+.message_box,
+.attachment_box {
+  position: relative;
+  margin: 15px 0;
+  padding: 39px 19px 14px;
+  *padding-top: 19px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.edit_butt,
+.image_butt {
+  position: absolute;
+  top: -1px;
+  left: 0px;
+}
+.destroy_butt {
+  position: absolute;
+  top: -1px;
+  left: 40px;
+}
+.file_butt {
+  position: absolute;
+  top: -1px;
+  left: 78px;
+}
+.url_butt {
+  position: absolute;
+  top: -1px;
+  left: 140px;
+}
+
 .btn-primary,
 .btn-success {
 color:white;

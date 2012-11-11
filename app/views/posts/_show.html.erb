@@ -1,60 +1,86 @@
-
-<h3><%= @post.title %></h3>
-
-<pre style='font-size:16px;background:white;'>
-<%= @post.body %>
-</pre>
-<% if @post.attachments.collect { |a| a.url }.compact.reject { |b| b.length == 0 }.count > 0 %>
-Links:
-<ul>
-	<% @post.attachments.each do |attach| %>
-	<% if !attach.url.blank? %>
-	<li><code><%= link_to attach.url, 'http://' + attach.url , :target => '_blank' %></code> | 
-		<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-	<% end %>
-	<% end %>
-</ul>
 <br>
-<% end %>
 
-<% if @post.attachments.collect { |a| a.image_file_name }.compact.count > 0 %>
-Files:
-<ul>
-	<% @post.attachments.each do |attach| %>
-		<% if !attach.image_file_name.nil? and !attach.image_content_type.include?('image') %>	
-			<li>
-				<code><%= link_to attach.image_file_name, attach.image.url, :target => '_blank' %></code>
-				<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-			</li>
+<div class="row">
+  <div class="span8">
+	<% current_user.id != @post.user_id ? box = 'blank_box' : box = 'message_box' %>
+	  <div class="<%= box %>">
+		<% if current_user.id == @post.user_id %>
+		<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini edit_butt' %>
+		<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning destroy_butt' %>
 		<% end %>
-	<% end %>
-</ul>
-<% end %>
+	    <h3><%= @post.title %></h3>
+	    <p class="lead"><%= @post.body %></p>
+	</div>	
+	
 
-<br>
-<% if @post.attachments.collect { |a| a.image_file_name }.compact.count > 0 %>
-Images:
-<ul>
-	<% @post.attachments.each do |attach| %>
-		<% if !attach.image_file_name.nil? and attach.image_content_type.include?('image') %>	
-			<li>
-				<%= link_to image_tag( attach.image.url(:thumb) ), attach.image.url, :class => "img-polaroid", :target => '_blank' %>
-			<%= link_to '(Remove)', attach, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-			</li>
-		<% end %>
-	<% end %>
-</ul>
-<% end %>
+	<div class='row pull-right'>
+	Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.strftime('%b %d, %Y') %>
+	</div>
+	    
+	<div id='comment'></div>
 
+	<%= render 'comments'%>
+	
+  </div><!--/span-->
 
-<div class='row pull-right'>
-Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.strftime('%b %d, %Y') %>
+ <div class="span4">
+
+	<% if current_user.id != @post.user_id and @post.attachments.count == 0 %>
+	<div class='blank_box'>
+		No attachments
+	</div>
+	
+	<% else %>
+	
+  <div class="attachment_box">
 	<% if current_user.id == @post.user_id %>
-	<%= link_to_function 'Add Attachment', "AddAttachment(); return false", :class => 'btn btn-primary btn-mini' %> | 
-	<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini' %> |
-	<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
+	<%= link_to_function 'Add Image', "AddAttachment('image'); return false", :class => 'btn btn-primary btn-mini image_butt' %> 
+	<%= link_to_function 'Add File', "AddAttachment('file'); return false", :class => 'btn btn-primary btn-mini file_butt' %> 
+	<%= link_to_function 'Add Link', "AddAttachment('url'); return false", :class => 'btn btn-primary btn-mini url_butt' %> 
 	<% end %>
-</div>
+	
+	<div id='attachment'></div>
+
+	<% if @post.file_count('image')[0] > 0 %>
+	<b>Images</b><br><br><ul>
+		<% @post.file_count('image')[1].each do |attach| %>
+				<li><%= link_to image_tag( attach.image.url(:thumb) ), attach.image.url, :target => '_blank' %>
+				<%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %></li><br>
+		<% end %>
+	</ul>
+	<% end %>
+
+	<% if @post.file_count('file')[0] > 0 %>
+	<b>Files</b><br><br><ul>
+		<% @post.file_count('file')[1].each.each do |attach| %>
+		<% attach.image_file_name.length > 21 ? link = attach.image_file_name[0..21] + '...' : link = attach.image_file_name %>
+				<li><code><%= link_to link, attach.image.url, :target => '_blank', :rel => "tooltip", :title => attach.image_file_name %></code>
+						  <%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</li>
+		<% end %>
+	</ul>
+	<% end %>
+	
+	
+	<% if @post.file_count('url')[0] > 0 %>
+	<b>Links</b><br><br><ul>		
+			<% @post.file_count('url')[1].each do |attach| %>
+			<% attach.url.length > 21 ? link = attach.url[0..21] + '...' : link = attach.url %>
+				<li><code><%= link_to link, 'http://' + attach.url , :target => '_blank', :rel => "tooltip", :title => attach.url %></code>
+						  <%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</li>
+		<% end %>			
+	</ul>
+	<% end %>
+	
+  </div>
+
+<% end %>
+
+ </div><!--/span-->
+
+</div><!--/row-->
+
 <br>
 
 
