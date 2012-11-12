@@ -1,3 +1,10 @@
+
+.navbar .brand:hover {
+  text-decoration: none;
+  background-color: #ffffff;
+}
+
+
 .center_table {
     margin-left: auto;
     margin-right: auto;
@@ -31,26 +38,10 @@ text-align: center
           border-radius: 4px;
 }
 
-.edit_butt,
-.image_butt {
+.left_corner, {
   position: absolute;
   top: -1px;
   left: 0px;
-}
-.destroy_butt {
-  position: absolute;
-  top: -1px;
-  left: 39px;
-}
-.file_butt {
-  position: absolute;
-  top: -1px;
-  left: 78px;
-}
-.url_butt {
-  position: absolute;
-  top: -1px;
-  left: 140px;
 }
 
 .btn-primary,

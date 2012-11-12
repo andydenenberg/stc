@@ -4,11 +4,22 @@
 	<% current_user.id != @post.user_id ? box = 'blank_box' : box = 'message_box' %>
 	  <div class="<%= box %>">
 		<% if current_user.id == @post.user_id %>
-		<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini edit_butt' %>
-		<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning destroy_butt' %>
+
+		<div class="btn-group left_corner">
+		  <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+		    Edit Message
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+			<%= link_to 'Edit', edit_post_path(@post) %>
+			<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+		  </ul>
+		</div>
+
+
 		<% end %>
 	    <h3><%= @post.title %></h3>
-	    <p class="lead"><%= @post.body.html_safe %></p>
+	    <p style='font-size:18px;'><%= @post.body.html_safe %></p>
 	</div>	
 	
 
@@ -33,10 +44,21 @@
 	
   <div class="attachment_box">
 	<% if current_user.id == @post.user_id %>
-	<%= link_to_function 'Add Image', "AddAttachment('image'); return false", :class => 'btn btn-primary btn-mini image_butt' %> 
-	<%= link_to_function 'Add File', "AddAttachment('file'); return false", :class => 'btn btn-primary btn-mini file_butt' %> 
-	<%= link_to_function 'Add Link', "AddAttachment('url'); return false", :class => 'btn btn-primary btn-mini url_butt' %> 
+
+	<div class="btn-group left_corner">
+	  <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+	    Add Attachment
+	    <span class="caret"></span>
+	  </a>
+	  <ul class="dropdown-menu">
+		<%= link_to_function 'Add Image', "AddAttachment('image'); return false" %> 
+		<%= link_to_function 'Add File', "AddAttachment('file'); return false" %> 
+		<%= link_to_function 'Add Link', "AddAttachment('url'); return false" %> 
+	  </ul>
+	</div>
+
 	<% end %>
+	
 	
 	<div id='attachment'></div>
 

@@ -1,24 +1,21 @@
 <%= link_to_function 'Add Comment', "AddComment(); return false", :class => 'btn btn-primary btn-mini' %>
-<br>
-
-<% if !@post.comments.empty? %>
-<h4>Comments:</h4>
-<% end %>
+<br><br>
 
 <% @post.comments.each do |c| %>
 
 <div class='row'>
-	<div class='span8'>
+	<div class='span9'>
 		<blockquote>
 			<%= c.note %>
-			<br><br> 
-	<b><%= User.find(c.user_id).name %></b> on <%= c.created_at.strftime('%b %d, %Y') %>
-	<% if current_user.id == c.user_id %>
-	 |  <%= link_to 'Edit', modify_comment_path(c), :class => 'btn btn-mini' %> |
-		<%= link_to 'Remove', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %> 
+			<br><br>
+			<div class='pull-right'>
+			<b><%= User.find(c.user_id).name %></b> on <%= c.created_at.strftime('%b %d, %Y') %>
+			<% if current_user.id == c.user_id %> |
+			    <%= link_to 'Edit', modify_comment_path(c) %> |
+			    <%= link_to 'Remove', c, method: :delete, data: { confirm: 'Are you sure?' } %> 
+			<% end %>
 		</blockquote>
-	<% end %>
-	
+		<br>	
 <hr>
 	</div>
 </div>
