@@ -1,88 +1,49 @@
-<script>
-$(function() {
-    $('#myCarousel').carousel({
-       interval: 5000
-    });
-});
-</script>
 
-  <div class="row">
-    <div class="span3" >
-      <div class="well" >
-		<h4>Latest News</h4>
+<table class='center_table'><tr><td>
+	<div class='hero-unit span8' style='padding:10px;background-color:white;'>
+	
+	<div class='center_text'>
+	    <h4>Welcome to our Collaboration</h4>
+	    <p>A place to store information and collect ideas on how best to help our two schools and their students achieve their fullest potential.</p>
+		<p><%= link_to 'Join the Discussion &raquo;'.html_safe, posts_path , :class => "btn btn-small btn-success" %></p>		    
+	</div>
+<br>
 
-		<b>Sonia Shankman Orthogenic School</b> <em>Homecoming 2012</em> <br>
+	</div>
+	<br>
+	
+</td></tr></table>
 		
-			<div style='border-bottom-style:solid;border-width:1px;'>										
-			<%= link_to image_tag('old_schools.png', :size => '256x128' ), 'http://events.r20.constantcontact.com/register/event?oeidk=a07e5571zik5804067d&llr=weg6xvgab', :target => '_blank' %><br>
-			Rekindle, Reunite and Reminisce	
-			<br><br>
-			</div>
-			
-			<h5>New Campus Progress...</h5>
-			   <div id="myCarousel" class="carousel slide">  
-			     <!-- Carousel items -->  
-				   <div class="carousel-inner">  
-					<% pix = Dir.glob("app/assets/images/groundbreaking/*") %>
-					<% thumbs = pix.select { |i| i =~ /_s.jpg/} %>
-					<% thumbs.each_with_index do |pix,i| %>
-						<% if i == 0 %>
-						<% clas = 'item active' %>
-						<% else %>
-						<% clas = 'item' %>
-						<% end %>
-				        <div class="<%= clas %>"><%= image_tag(pix.to_s.gsub('app/assets/images/', '').gsub('_s.jpg', '.jpg'), :class => "img-polaroid", :size => '220x220' ) %>
-						</div> 
-			 		<% end %>
-				  </div>  
-			  <!-- Carousel nav -->  
-				</div>  
-				<p>Groundbreaking Celebration...</p>
-				<hr>
-				
-      </div><!--/.well -->
-    </div><!--/span-->
+		<hr>
 
-    <div class="span9">
-      <div class="well" style='background:#ffffff;'>
-		
 	  <div class="row">
-        <div class="span6">
-		    <h4>Our New Campus</h4>
-		    <p>Our expansion will enable us to reach more children and families than ever 
-			before.  Our new space will also equip us to better serve the community 
-			around us. The campus will transform nearly a full city block in Woodlawn 
-			and will offer neighborhood residents facilities and resources not currently 
-			available to them.</p>
-			<p><a class="btn btn-mini btn-success" href="#">Info on the New Campus &raquo;</a></p>		    
-        </div><!--/span-->
-        <div class="span2">
-		<%= image_tag('NewCampusRendering.png', :size => '150x150') %>
-        </div><!--/span-->
-      </div><!--/row-->
-<hr>
-      
 		
-      <div class="row">
         <div class="span4">
 		    <h4>The Sonia Shankman Orthogenic School</h4>
 		    <p><%= image_tag('Orthogenic_front.jpeg', :size => '100x75', :style => 'float:right;margin: 4px;' ) %> The Orthogenic School is a residential and day school for bright students who are coping with profound emotional challenges. Over the course of nearly 100 years, the O-School’s distinctive blend of academic rigor and relationship-based treatment has enabled more than 80 percent of students to return home to their families and mainstream schools. 
 		</p>
-		    <p><a class="btn btn-mini btn-success" href="#">Info on the O-School &raquo;</a></p>
         </div><!--/span-->
+
+        <div class="span4">
+		    <h4>Our New Campus</h4>
+			<p><%= image_tag('NewCampusRendering.png', :size => '150x100', :style => 'float:right;margin: 4px;') %>
+		    
+			Our expansion will enable us to reach more children and families than ever before.  
+			Our new space will also equip us to better serve the community 
+			around us. The campus will transform nearly a full city block in Woodlawn 
+			and will offer neighborhood residents facilities and resources not currently 
+			available to them.
+		</p>
+        </div><!--/span-->
+
+
         <div class="span4">
 		    <h4>The Hyde Park Day School</h4>
 		    <p><%= image_tag('HPD_Chi.png', :size => '100x90', :style => 'float:right;margin: 4px;' ) %> Hyde Park Day School offers bright students with learning disabilities an innovative and comprehensive education. Our intensive, individualized curriculum prepares students for successful transitions to mainstream schools.  <%= image_tag('HPD_Nfld.png', :size => '100x90', :style => 'float:right;margin: 4px;' ) %>Our teachers and staff focus on academic and self-advocacy skills in a collaborative environment, enhancing students’ self-esteem and self confidence while fostering a positive attitude toward learning.</p>
-		    <p><a class="btn btn-mini btn-success" href="#">Info on the HPDS &raquo;</a></p>
         </div><!--/span-->
       </div><!--/row-->
 
 
-
-</div><!--/well-->
-</div><!--/span-->
-
-</div><!--/row-->
 
 
 
