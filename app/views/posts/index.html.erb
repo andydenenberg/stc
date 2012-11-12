@@ -1,19 +1,23 @@
-<h3>Discussion</h3>
 
 <div class='row'>
-<div class='span11 offset1'>
+<div class='span12'>
+	<h3>Discussion</h3>
 <table class='center_table'>
 
 <% @posts.each do |post| %>
   <tr><td></td>
-	<% post.body.length > 400 ? body = post.body[0..400].html_safe + '...' : body = post.body.html_safe %>
+	<% post.body.length > 300 ? body = post.body[0..300].html_safe + '...' : body = post.body.html_safe %>
     <td>
 		<div class='row'>
-				<div class='span4 well' style='padding:15px;'>
-					<div class='lead'><%= link_to post.title, post %></div><br>
-		    		<%= User.find(post.user_id).name %> on <small><%= post.created_at.strftime('%b-%d-%Y') %></small><br>
-					Comments: <%= post.comments.count %>
+			<div class='well span4' style='padding:5px;background-color:white;'>
+				<div class='well' style='padding:10px;'>
+					<div class='lead' style='text-align:center;'><%= link_to post.title, post %></div>
 				</div>
+					<div style='text-align:center;'>
+					<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini' %><br>
+		    		<br><small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
+					Comments: <%= post.comments.count %></small></div>
+			</div>
 				<div class='span7 well' style='background-color:white;'>
 		    		<%= body %><br>
 				</div>
@@ -23,9 +27,11 @@
   <td></td></tr>
 <% end %>
 </table>
+<br>
+<%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini' %>
 </div>
 </div>
 
 <br />
 
-<%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini' %>
+
