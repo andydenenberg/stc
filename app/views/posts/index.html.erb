@@ -1,27 +1,30 @@
 <h3>Discussion</h3>
 
-<table class='table table-striped'>
-  <thead>
-	<tr>
-    <th>Title</th>
-    <th>Message</th>
-    <th>Created by</th>
-	<th>Date</th>
-	<th>Comments</th>
-  </tr>
- </thead>
+<div class='row'>
+<div class='span11 offset1'>
+<table class='center_table'>
 
 <% @posts.each do |post| %>
-  <tr>
-	<% post.body.length > 50 ? body = post.body[0..50] + '...' : body = post.body %>
-    <td><%= link_to post.title, post %></td>
-    <td><%= link_to body, post %></td>
-    <td><%= User.find(post.user_id).name %></td>
-	<td><%= post.created_at.strftime('%b-%d-%Y') %></td>
-	<td style='text-align:center;'><%= post.comments.count %></td>
-  </tr>
+  <tr><td></td>
+	<% post.body.length > 400 ? body = post.body[0..400].html_safe + '...' : body = post.body.html_safe %>
+    <td>
+		<div class='row'>
+				<div class='span4 well' style='padding:15px;'>
+					<div class='lead'><%= link_to post.title, post %></div><br>
+		    		<%= User.find(post.user_id).name %> on <small><%= post.created_at.strftime('%b-%d-%Y') %></small><br>
+					Comments: <%= post.comments.count %>
+				</div>
+				<div class='span7 well' style='background-color:white;'>
+		    		<%= body %><br>
+				</div>
+		</div>
+		<br>
+	</td>
+  <td></td></tr>
 <% end %>
 </table>
+</div>
+</div>
 
 <br />
 
