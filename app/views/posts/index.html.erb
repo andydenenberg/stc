@@ -9,22 +9,21 @@
 	<% post.body.length > 300 ? body = post.body[0..300].html_safe : body = post.body.html_safe %>
     <td>
 		<div class='row'>
-			<div class='well span4' style='padding:5px;background-color:white;'>
-				<div class='well' style='padding:10px;'>
+			<div class='introbox span4' style='margin-right:25px;'>
 					<div class='lead' style='text-align:center;'><%= link_to post.title, post %></div>
-				</div>
 					<div style='text-align:center;'>
 					<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini' %><br>
 		    		<br><small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
 					Comments: <%= post.comments.count %></small></div>
 			</div>
-				<div class='span7 well' style='background-color:white;'>
+				<div class='span7' style='background-color:white;margin-left:25px'>
 		    		<%= body %> <%= link_to '...(Read more)', post %><br>
 				</div>
 		</div>
 		<br>
 	</td>
   <td></td></tr>
+
 <% end %>
 </table>
 <br>

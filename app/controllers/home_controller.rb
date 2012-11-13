@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!, :except => :welcome
+  layout :choose_layout
 
   def reference
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
@@ -26,5 +27,14 @@ class HomeController < ApplicationController
   
   def index
     @users = User.all
+  end
+
+private
+  def choose_layout    
+    if [ 'events' ].include? action_name
+      'blank'
+    else
+      'application'
+    end
   end
 end
