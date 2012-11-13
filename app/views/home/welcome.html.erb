@@ -12,7 +12,7 @@ $(function() {
 		   <div id="myCarousel" class="carousel slide">  
 		     <!-- Carousel items -->  
 			   <div class="carousel-inner">  
-				<% thumbs = [ 'groundbreaking/IMG_7682.jpg', 'groundbreaking/IMG_7697.jpg', 'groundbreaking/IMG_7434.jpg'] %>
+				<% thumbs = [ 'groundbreaking/IMG_7682.jpg', 'groundbreaking/IMG_7434.jpg'] , 'groundbreaking/IMG_7697.jpg' %>
 				<% thumbs.each_with_index do |pix,i| %>
 					<% if i == 0 %>
 					<% clas = 'item active' %>
@@ -35,7 +35,7 @@ $(function() {
 		
 				<p style='font-size: 16px;font-weight: 200;'>
 					<br>Welcome to our Collaboration.<br><br>
-					A place to store information and collect ideas on how best to help our two schools and their students achieve their fullest potential.<br><br>Together we can transform the lives of countless students and families, as well as the Woodlawn community. &nbsp;&nbsp;</p><br>
+					Working together to help our schools and their students achieve their fullest potential.<br><br>Together we can transform the lives of countless students and families, as well as the Woodlawn community. &nbsp;&nbsp;</p><br>
 
 			</div>
 <%= link_to 'Enter Site and Learn more', events_path, :class => 'btn btn-success btn-large' %>
