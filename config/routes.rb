@@ -16,7 +16,7 @@ Stc::Application.routes.draw do
   
   authenticated :user do
 #    root :to => 'home#index'
-    root :to => 'home#start'
+    root :to => 'home#events'
   end
   root :to => "home#welcome"
   devise_for :users

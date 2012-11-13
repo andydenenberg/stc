@@ -6,7 +6,7 @@
 
 <% @posts.each do |post| %>
   <tr><td></td>
-	<% post.body.length > 300 ? body = post.body[0..300].html_safe + '...' : body = post.body.html_safe %>
+	<% post.body.length > 300 ? body = post.body[0..300].html_safe : body = post.body.html_safe %>
     <td>
 		<div class='row'>
 			<div class='well span4' style='padding:5px;background-color:white;'>
@@ -19,7 +19,7 @@
 					Comments: <%= post.comments.count %></small></div>
 			</div>
 				<div class='span7 well' style='background-color:white;'>
-		    		<%= body %><br>
+		    		<%= body %> <%= link_to '...(Read more)', post %><br>
 				</div>
 		</div>
 		<br>
