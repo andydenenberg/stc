@@ -13,10 +13,12 @@
 	
 	<div class='span6'>
 		<div class='introbox'>
-	    	<h4>Latest News</h4>
-			<p><b><%= link_to 'A Challenge Unmet', 'http://www.chicagotribune.com/news/watchdog/ct-met-disabilities-summary-20121113,0,7345947.story' %></b><br> | Chicago Tribune | Nov-13-2012</p>
-	    	<p>Students with emotional or learning disabilities are entitled to an education. But in Chicago, they often miss weeks of school, more than other children</p>
+			<% Post.where(:type_is => 'news').each do |post| %>
+	    	<h4><%= post.title %></h4>
+			<p><b><%= link_to post.attachments.first.url %></b><br> | Chicago Tribune | Nov-13-2012</p>
+	    	<p><%= post.attachments.first.description %></p>
 			<hr>
+			<% end %>
 		</div>		    
 	<br>
 	<br>
@@ -24,7 +26,8 @@
 </div>
 
 
-		
+http://www.chicagotribune.com/news/watchdog/ct-met-disabilities-summary-20121113,0,7345947.story<br>
+Students with emotional or learning disabilities are entitled to an education. But in Chicago, they often miss weeks of school, more than other children<br>		
 		<hr>
 
 	<div class="row">		

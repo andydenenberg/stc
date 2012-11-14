@@ -2,35 +2,36 @@
 <div class='row'>
 <div class='span12'>
 	<h3>Discussion</h3>
-<table class='center_table'>
 
 <% @posts.each do |post| %>
-  <tr><td></td>
 	<% post.body.length > 300 ? body = post.body[0..300].html_safe : body = post.body.html_safe %>
-    <td>
 		<div class='row'>
-			<div class='introbox span4' style='margin-right:25px;'>
-					<div class='lead' style='text-align:center;'><%= link_to post.title, post %></div>
-					<div style='text-align:center;'>
-					<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini' %><br>
-		    		<br><small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
-					Comments: <%= post.comments.count %></small></div>
+			<div class='span11'>
+			<div class='row introbox  offset1' style='min-height: 110px;'>
+			<div class='span4'>
+					<div class='lead' style='border-bottom:thin dotted #000000;
+					}'><%= link_to post.title, post %></div>
+					<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
+					Comments: <%= post.comments.count %> | <%= post.type_is %></small>
+					<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini pull-right' %>
+					
 			</div>
-				<div class='span7' style='background-color:white;margin-left:25px'>
-		    		<%= body %> <%= link_to '...(Read more)', post %><br>
-				</div>
+			<div class='span5'>
+	    		<%= body %> <%= link_to '...(Read more)', post %>
+			</div>
+			</div>
+			</div>
 		</div>
 		<br>
-	</td>
-  <td></td></tr>
 
 <% end %>
-</table>
-<br>
-<%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini' %>
+
+<%= will_paginate @posts, :class => 'pagination pagination-centered pagination-small'%>
+<%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini', :style => 'text-align:center;'%>
 </div>
 </div>
 
 <br />
+
 
 
