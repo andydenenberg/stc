@@ -7,28 +7,32 @@
 	    	<p>A place to store information and collect ideas on how best to help our two schools and their students achieve their fullest potential.</p>
 			<p><%= link_to 'Join the Discussion &raquo;'.html_safe, posts_path , :class => "btn btn-small btn-success" %></p>
 		</div>		    
-	<br>
-	<br>
 	</div>
 	
 	<div class='span6'>
 		<div class='introbox'>
+			<h4>News</h4>
 			<% Post.where(:type_is => 'news').each do |post| %>
-	    	<h4><%= post.title %></h4>
-			<p><b><%= link_to post.attachments.first.url %></b><br> | Chicago Tribune | Nov-13-2012</p>
+	    	<b><%= post.title %></b>
+			<p><%= link_to post.body %></p>
+			<p><code><%= link_to 'Read Item', post.attachments.first.url, :target => '_blank'  %></code> | Chicago Tribune | <%= post.created_at.strftime('%b-%d-%Y') %></p>
 	    	<p><%= post.attachments.first.description %></p>
 			<hr>
 			<% end %>
+			<div class="pagination pagination-small pagination-right">
+			  <ul>
+			    <li><a href="#">Prev</a></li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">Next</a></li>
+			  </ul>
+			</div>
+			
 		</div>		    
-	<br>
-	<br>
 	</div>
 </div>
-
-
-http://www.chicagotribune.com/news/watchdog/ct-met-disabilities-summary-20121113,0,7345947.story<br>
-Students with emotional or learning disabilities are entitled to an education. But in Chicago, they often miss weeks of school, more than other children<br>		
-		<hr>
 
 	<div class="row">		
         <div class="span4 schoolbox">
