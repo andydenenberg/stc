@@ -22,7 +22,8 @@ class HomeController < ApplicationController
   def groundbreaking    
   end
   
-  def start    
+  def start 
+    @news = Post.where(:type_is => 'news').paginate(:page => params[:page], :per_page => 2)   
   end
   
   def index

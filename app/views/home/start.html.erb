@@ -12,29 +12,20 @@
 	<div class='span6'>
 		<div class='introbox'>
 			<h4>News</h4>
-			<% Post.where(:type_is => 'news').each do |post| %>
+			<% @news.each do |post| %>
 	    	<b><%= post.title %></b>
-			<% if post.file_count('url')[0] > 0 %>
-				<p><%= link_to 'Read Item', 'http://' + post.attachments.first.url, :target => '_blank', :class => 'code' %> |
-			<% end %>
 			<p>
+			<% if post.file_count('url')[0] > 0 %>
+				<p><%= link_to 'Read Item', "http://" + post.attachments.first.url, :target => '_blank', :class => 'code' %> |
+			<% end %>
 			<% if post.file_count('file')[0] > 0 or post.file_count('image')[0] > 0 %>
-				<code><%= link_to 'Attachment', post.attachments.first.image.url, :target => '_blank' %></code> |
+				<code><%= link_to 'Read Item', post.attachments.first.image.url, :target => '_blank', :class => 'code' %></code> |
 			<% end %> 
  				<%= post.created_at.strftime('%b-%d-%Y') %></p>
 	    	<p><%= post.attachments.first.description %></p>
-			<hr>
+	<hr>
 			<% end %>
-			<div class="pagination pagination-small pagination-right">
-			  <ul>
-			    <li><a href="#">Prev</a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">Next</a></li>
-			  </ul>
-			</div>
+				<%= will_paginate @news, :class => 'pagination pagination-right pagination-small'%>
 			
 		</div>		    
 	</div>
