@@ -1,0 +1,22 @@
+<% @posts.each do |post| %>
+	<% post.body.length > 300 ? body = post.body[0..300].html_safe : body = post.body.html_safe %>
+		<div class='row'>
+			<div class='span11'>
+				<div class='row introbox  offset1' style='min-height: 110px;'>
+					<div class='span4'>
+							<div class='lead' style='border-bottom:thin dotted #000000;
+							}'><%= link_to post.title, post %></div>
+							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
+							Comments: <%= post.comments.count %> | <%= post.type_is %></small>
+							<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini pull-right' %>
+					
+					</div>
+					<div class='span5'>
+			    		<%= body %> <%= link_to '...(Read more)', post %>
+					</div>
+					<br>
+				</div>
+			</div>
+		</div>
+		<br><br>
+<% end %>
