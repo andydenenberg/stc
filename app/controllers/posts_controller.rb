@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     else
       type_is = 'type_is = "' + params[:type_is] + '"' 
     end
-    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 1)
+    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 3)
     
     render :partial => 'index', :layout => false       
   end
