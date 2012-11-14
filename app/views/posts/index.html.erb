@@ -1,31 +1,25 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  FindByCriteria();
+})
 
+function FindByCriteria() {
+   Type_is = document.getElementById('type_is').value ;
+    $.get('<%= search_posts_path %>', 
+	          { type_is:Type_is }, 
+	                  function(data) {
+	            $("#table").html(data);
+	          });
+  }
+
+
+</script>
 <div class='row'>
 <div class='span12'>
 	<h3>Discussion</h3>
+	<%= select_tag "type_is", options_for_select(['All', 'Discussion', 'News']), :onchange => "FindByCriteria();", :class => 'span2' %>
 
-<% @posts.each do |post| %>
-	<% post.body.length > 300 ? body = post.body[0..300].html_safe : body = post.body.html_safe %>
-		<div class='row'>
-			<div class='span11'>
-			<div class='row introbox  offset1' style='min-height: 110px;'>
-			<div class='span4'>
-					<div class='lead' style='border-bottom:thin dotted #000000;
-					}'><%= link_to post.title, post %></div>
-					<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
-					Comments: <%= post.comments.count %> | <%= post.type_is %></small>
-					<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini pull-right' %>
-					
-			</div>
-			<div class='span5'>
-	    		<%= body %> <%= link_to '...(Read more)', post %>
-			</div>
-			</div>
-			</div>
-		</div>
-		<br><br>
-
-<% end %>
-
+<div id='table'>
 <%= will_paginate @posts, :class => 'pagination pagination-centered pagination-small'%>
 <%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini', :style => 'text-align:center;'%>
 </div>

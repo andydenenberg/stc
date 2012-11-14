@@ -1,21 +1,33 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
   
-  def add_attachment
-    authorize! :add_attachment, @user, :message => 'Not authorized as an administrator.'
-    @post = Post.find(params[:post])
-    @attachment = Attachment.new
-    @user = current_user
-    @attach_url = params[:attach_url]
-    render :partial => 'add_attachment', :layout => false    
-  end
-
-  def add_comment
-    authorize! :add_comment, @user, :message => 'Not authorized as an administrator.'
-    @post = Post.find(params[:post])
-    @comment = Comment.new
-    @user = current_user
-    render :partial => 'add_comment', :layout => false    
+#  def add_attachment
+#    authorize! :add_attachment, @user, :message => 'Not authorized as an administrator.'
+#    @post = Post.find(params[:post])
+#    @attachment = Attachment.new
+#    @user = current_user
+#    @attach_url = params[:attach_url]
+#    render :partial => 'add_attachment', :layout => false    
+#  end
+#
+#  def add_comment
+#    authorize! :add_comment, @user, :message => 'Not authorized as an administrator.'
+#    @post = Post.find(params[:post])
+#    @comment = Comment.new
+#    @user = current_user
+#    render :partial => 'add_comment', :layout => false    
+#  end
+  
+  def search
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    if params[:type_is] == 'All' 
+      type_is = '' 
+    else
+      type_is = 'type_is = "' + params[:type_is] + '"' 
+    end
+    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 1)
+    
+    render :partial => 'index', :layout => false       
   end
   
   def index

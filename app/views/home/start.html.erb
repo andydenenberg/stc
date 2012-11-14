@@ -16,13 +16,14 @@
 	    	<b><%= post.title %></b>
 			<p>
 			<% if post.file_count('url')[0] > 0 %>
-				<p><%= link_to 'Read Item', "http://" + post.attachments.first.url, :target => '_blank', :class => 'code' %> |
+				<code><%= link_to 'Read Item', "http://" + post.attachments.first.url, :target => '_blank' %></code> |
 			<% end %>
 			<% if post.file_count('file')[0] > 0 or post.file_count('image')[0] > 0 %>
-				<code><%= link_to 'Read Item', post.attachments.first.image.url, :target => '_blank', :class => 'code' %></code> |
+				<code><%= link_to 'Read Item', post.attachments.first.image.url, :target => '_blank' %></code> |
 			<% end %> 
  				<%= post.created_at.strftime('%b-%d-%Y') %></p>
 	    	<p><%= post.attachments.first.description %></p>
+			<p><%= post.title[0.150] %></p>
 	<hr>
 			<% end %>
 				<%= will_paginate @news, :class => 'pagination pagination-right pagination-small'%>
