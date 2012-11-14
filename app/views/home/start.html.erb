@@ -14,8 +14,14 @@
 			<h4>News</h4>
 			<% Post.where(:type_is => 'news').each do |post| %>
 	    	<b><%= post.title %></b>
-			<p><%= link_to post.body, post.attachments.first.url, :target => '_blank' %></p>
-			<p><code><%= link_to 'Read Item', post.attachments.first.url, :target => '_blank'  %></code> | <%= post.attachments.first.description %> | <%= post.created_at.strftime('%b-%d-%Y') %></p>
+			<% if post.file_count('url')[0] > 0 %>
+				<p><%= link_to 'Read Item', 'http://' + post.attachments.first.url, :target => '_blank', :class => 'code' %> |
+			<% end %>
+			<p>
+			<% if post.file_count('file')[0] > 0 or @post.file_count('image')[0] > 0 %>
+				<code><%= link_to 'Attachment', post.attachments.first.image.url, :target => '_blank' %></code> |
+			<% end %> 
+ 				<%= post.created_at.strftime('%b-%d-%Y') %></p>
 	    	<p><%= post.attachments.first.description %></p>
 			<hr>
 			<% end %>

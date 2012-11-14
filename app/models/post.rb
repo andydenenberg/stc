@@ -1,8 +1,9 @@
 class Post < ActiveRecord::Base
-  attr_accessible :body, :title, :user_id, :type_is
-  has_many :comments
+  has_many :attachments, :dependent => :destroy
+  attr_accessible :body, :title, :user_id, :type_is, :attachments_attributes
+  has_many :comments, :dependent => :destroy
   has_one :user
-  has_many :attachments
+  accepts_nested_attributes_for :attachments, :allow_destroy => true
   
   def file_count(kind)
         

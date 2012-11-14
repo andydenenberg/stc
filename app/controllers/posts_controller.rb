@@ -45,7 +45,8 @@ class PostsController < ApplicationController
   def new
     authorize! :new, @user, :message => 'Not authorized as an administrator.'
     @post = Post.new
-
+    @post.attachments.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
@@ -66,11 +67,6 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-
-        if params[:url]
-        @attachment = Attachment.create(:url => params[:url], :description => params[:description], :post_id => @post.id)
-        end
-
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
