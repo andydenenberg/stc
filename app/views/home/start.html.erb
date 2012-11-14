@@ -14,8 +14,8 @@
 			<h4>News</h4>
 			<% Post.where(:type_is => 'news').each do |post| %>
 	    	<b><%= post.title %></b>
-			<p><%= link_to post.body %></p>
-			<p><code><%= link_to 'Read Item', post.attachments.first.url, :target => '_blank'  %></code> | Chicago Tribune | <%= post.created_at.strftime('%b-%d-%Y') %></p>
+			<p><%= link_to post.body, post.attachments.first.url, :target => '_blank' %></p>
+			<p><code><%= link_to 'Read Item', post.attachments.first.url, :target => '_blank'  %></code> | <%= post.attachments.first.description %> | <%= post.created_at.strftime('%b-%d-%Y') %></p>
 	    	<p><%= post.attachments.first.description %></p>
 			<hr>
 			<% end %>
