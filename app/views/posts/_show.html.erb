@@ -18,25 +18,24 @@
 
 
 		<% end %>
+		
+		<div class='lead' style='border-bottom:thin dotted #000000;'><%= link_to @post.title, @post %></div>
+
+<%= @post.attachments.first.description.html_safe %><br>
+<br><b>Attachments:</b>
+<% if @post.file_count('url')[0] > 0 %>
+<code><%= link_to 'Open URL', "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
+<% end %>
+<% if @post.file_count('file')[0] > 0 %>
+<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
+<% end %> 
+<% if @post.file_count('image')[0] > 0 %>
+<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
+<% end %> 
+<br>
+<p style='font-size:16px;line-height:120%;'><%= @post.body.html_safe %></p>
 	
-		<div class='lead' style='border-bottom:thin dotted #000000;
-		}'><%= link_to @post.title, @post %></div>
-		<small><%= User.find(@post.user_id).name %> on <%= @post.created_at.strftime('%b-%d-%Y') %><br>
-		Comments: <%= @post.comments.count %> | 
-		<span class="<%= type_color(@post.type_is) %>"><%= @post.type_is %></span></small>
-		<%= link_to 'Read more', @post, :class => 'btn btn-success btn-mini pull-right' %>
-	    <p style='font-size:14px;line-height:120%;'><%= @post.body.html_safe %></p>
 	
-	
-		<p>
-		<% if @post.file_count('url')[0] > 0 %>
-			<code><%= link_to 'Read Item', "http://" + @post.attachments.first.url, :target => '_blank' %></code> |
-		<% end %>
-		<% if @post.file_count('file')[0] > 0 or @post.file_count('image')[0] > 0 %>
-			<code><%= link_to 'Read Item', @post.attachments.first.image.url, :target => '_blank' %></code> |
-		<% end %> 
-			<%= @post.created_at.strftime('%b-%d-%Y') %></p>
-    	<p><%= @post.attachments.first.description.html_safe %></p>
 	
 	</div>	
 	

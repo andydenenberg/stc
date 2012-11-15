@@ -6,14 +6,13 @@
 					<div class='span4'>
 							<div class='lead' style='border-bottom:thin dotted #000000;
 							}'><%= link_to post.title, post %></div>
-							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
+							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %> |
 							Comments: <%= post.comments.count %> | 
-							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small>
-							<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini pull-right' %>
-					
+							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small><br>
+							
 					</div>
 					<div class='span5'>
-			    		<%= body %> <%= link_to '...(Read more)', post %>
+			    		<%= post.attachments.first.description.html_safe %>
 					</div>
 					<br>
 				</div>

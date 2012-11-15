@@ -13,7 +13,7 @@
 		<div class='introbox'>
 			<h4>News</h4>
 			<% @news.each do |post| %>
-	    	<b><em style='font-size:16px;'><%= post.title %></em></b>
+	    	<b><em style='font-size:16px;'><%= link_to post.title, post_path(post) %></em></b>
 	    	<p><%= post.attachments.first.description.html_safe %>
 			   <code><%= link_to 'Read Item', post_path(post) %></code> |
  					 <%= post.created_at.strftime('%b-%d-%Y') %></p>
