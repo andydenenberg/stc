@@ -79,6 +79,8 @@ class PostsController < ApplicationController
   def edit
     authorize! :edit, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
+    @item_type = @post.type_is
+    
   end
 
   # POST /posts
