@@ -12,7 +12,9 @@
 							
 					</div>
 					<div class='span5'>
+						<% if post.attachments.count > 0 %>
 			    		<%= post.attachments.first.description.html_safe %>
+						<% end %>
 					</div>
 					<br>
 				</div>

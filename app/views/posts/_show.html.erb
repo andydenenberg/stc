@@ -21,10 +21,11 @@
 		
 		<div class='lead' style='border-bottom:thin dotted #000000;'><%= link_to @post.title, @post %></div>
 
+
 <%= @post.attachments.first.description.html_safe %><br>
 <br><b>Attachments:</b>
 <% if @post.file_count('url')[0] > 0 %>
-<code><%= link_to 'Open URL', "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
+<code><%= link_to @post.attachments.first.image_file_name, "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
 <% end %>
 <% if @post.file_count('file')[0] > 0 %>
 <code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
