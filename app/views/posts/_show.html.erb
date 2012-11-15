@@ -21,18 +21,19 @@
 		
 		<div class='lead' style='border-bottom:thin dotted #000000;'><%= link_to @post.title, @post %></div>
 
-
-<%= @post.attachments.first.description.html_safe %><br>
-<br><b>Attachments:</b>
-<% if @post.file_count('url')[0] > 0 %>
-<code><%= link_to @post.attachments.first.image_file_name, "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
+<% if @post.attachments.count > 0 %>
+	<%= @post.attachments.first.description.html_safe %><br>
+	<br><b>Attachments:</b>
+	<% if @post.file_count('url')[0] > 0 %>
+	<code><%= link_to @post.attachments.first.image_file_name, "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
+	<% end %>
+	<% if @post.file_count('file')[0] > 0 %>
+	<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
+	<% end %> 
+	<% if @post.file_count('image')[0] > 0 %>
+	<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
+	<% end %> 
 <% end %>
-<% if @post.file_count('file')[0] > 0 %>
-<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
-<% end %> 
-<% if @post.file_count('image')[0] > 0 %>
-<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
-<% end %> 
 <br>
 <p style='font-size:16px;line-height:120%;'><%= @post.body.html_safe %></p>
 	

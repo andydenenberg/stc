@@ -8,7 +8,7 @@
 							}'><%= link_to post.title, post %></div>
 							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %> |
 							Comments: <%= post.comments.count %> | 
-							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small><br>
+							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small><br><br>
 							
 					</div>
 					<div class='span5'>
