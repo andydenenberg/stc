@@ -20,19 +20,28 @@ class PostsController < ApplicationController
   
   def search
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    if params[:type_is] == 'All' 
+    if params[:type_is] == 'Show Discussions & News' 
       type_is = '' 
-    else
-      type_is = 'type_is = "' + params[:type_is] + '"' 
+    elsif params[:type_is] == 'Show Discussion' 
+      type_is = 'type_is = "discussion"' 
+    elsif params[:type_is] == 'Show News' 
+      type_is = 'type_is = "news"' 
     end
-    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 3)
+    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 5)
     
     render :partial => 'index', :layout => false       
   end
   
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @posts = Post.paginate(:page => params[:page], :per_page => 3)
+#    @posts = Post.paginate(:page => params[:page], :per_page => 3)
+    params[:type_is] ||= 'All'
+    if params[:type_is] == 'All' 
+      type_is = '' 
+    else
+      type_is = 'type_is = "' + params[:type_is] + '"' 
+    end
+    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 5)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -56,6 +65,7 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     authorize! :new, @user, :message => 'Not authorized as an administrator.'
+    @item_type = params[:item_type]
     @post = Post.new
     @post.attachments.build
     

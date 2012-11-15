@@ -8,8 +8,8 @@
     			<%= f.text_field :title  , :class => "span4" %>
 			</div>
 			<div class='span4'>
-				<label for="stackedSelect">Type of Post</label>
-				<%= f.select :type_is , [ 'Discussion', 'News' ] %>
+				<label for="stackedSelect">Type of Item</label>
+				<%= f.select :type_is , [ 'Discussion', 'News' ] , :selected => @item_type %>
 			</div>
 		</div>
 		
@@ -37,7 +37,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %> | 
+    <%= f.button :submit , 'Save' %> | 
 	<%= link_to 'Cancel', @post %>
   </div>
 <% end %>

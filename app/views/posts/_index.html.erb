@@ -7,7 +7,8 @@
 							<div class='lead' style='border-bottom:thin dotted #000000;
 							}'><%= link_to post.title, post %></div>
 							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %><br>
-							Comments: <%= post.comments.count %> | <%= post.type_is %></small>
+							Comments: <%= post.comments.count %> | 
+							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small>
 							<%= link_to 'Read more', post, :class => 'btn btn-success btn-mini pull-right' %>
 					
 					</div>
@@ -18,5 +19,6 @@
 				</div>
 			</div>
 		</div>
-		<br><br>
+		<br><br>		
 <% end %>
+<%= will_paginate @posts, :class => 'pagination pagination-centered pagination-small', :style => 'vertical-align:middle;'%>

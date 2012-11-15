@@ -12,18 +12,38 @@ function FindByCriteria() {
 	          });
   }
 
+$(function() {
+  $(".pagination a").live("click", function() {
+    $(".pagination").html("Page is loading...");
+   Type_is = document.getElementById('type_is').value ;
+    $.get(this.href, 
+	          { type_is:Type_is }, 
+	                  function(data) {
+	            $("#table").html(data);
+	          });
+
+    return false;
+  });
+});
 
 </script>
-<div class='row'>
-<div class='span12'>
-	<h3>Discussion</h3>
-	<%= select_tag "type_is", options_for_select(['All', 'Discussion', 'News']), :onchange => "FindByCriteria();", :class => 'span2' %>
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+	<form class="navbar-form">
+	  <%= select_tag "type_is", options_for_select(['Show Discussions & News', 'Show Discussion', 'Show News']), :onchange => "FindByCriteria();", :class => 'span3' %> | 
+	  <%= link_to 'New Discussion Item', new_post_path(:item_type => 'Discussion'), :class => 'btn' %> |
+	  <%= link_to 'New News Item', new_post_path(:item_type => 'News'), :class => 'btn' %>	
+	</form>
+    </ul>
+  </div>
+</div>
+
 
 <div id='table'>
-<%= will_paginate @posts, :class => 'pagination pagination-centered pagination-small'%>
-<%= link_to 'New Discussion', new_post_path, :class => 'btn btn-primary btn-mini', :style => 'text-align:center;'%>
+	<%= render 'index' %>
 </div>
-</div>
+
 
 <br />
 

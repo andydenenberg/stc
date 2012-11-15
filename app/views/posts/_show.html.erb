@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="span9">
+  <div class="span9 offset1">
 	<% current_user.id != @post.user_id ? box = 'blank_box' : box = 'message_box' %>
 	  <div class="<%= box %>">
 		<% if current_user.id == @post.user_id %>
@@ -18,7 +18,13 @@
 
 
 		<% end %>
-	    <h3><%= @post.title %></h3>
+	
+		<div class='lead' style='border-bottom:thin dotted #000000;
+		}'><%= link_to @post.title, @post %></div>
+		<small><%= User.find(@post.user_id).name %> on <%= @post.created_at.strftime('%b-%d-%Y') %><br>
+		Comments: <%= @post.comments.count %> | 
+		<span class="<%= type_color(@post.type_is) %>"><%= @post.type_is %></span></small>
+		<%= link_to 'Read more', @post, :class => 'btn btn-success btn-mini pull-right' %>
 	    <p style='font-size:14px;line-height:120%;'><%= @post.body.html_safe %></p>
 	</div>	
 	
@@ -33,81 +39,6 @@
 	
   </div><!--/span-->
 
- <div class="span3">
-
-	<% if current_user.id != @post.user_id and @post.attachments.count == 0 %>
-	<div class='blank_box'>
-		No attachments
-	</div>
-	
-	<% else %>
-	
-  <div class="attachment_box">
-	<% if current_user.id == @post.user_id %>
-
-	<div class="btn-group left_corner">
-	  <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
-	    Add Attachment
-	    <span class="caret"></span>
-	  </a>
-	  <ul class="dropdown-menu">
-		<%= link_to_function 'Add Image', "AddAttachment('image'); return false" %> 
-		<%= link_to_function 'Add File', "AddAttachment('file'); return false" %> 
-		<%= link_to_function 'Add Link', "AddAttachment('url'); return false" %> 
-	  </ul>
-	</div>
-
-	<% end %>
-	
-	
-	<div id='attachment'></div>
-
-	<br>
-	<% if @post.file_count('image')[0] > 0 %>
-	<b>Images</b><br><br><table class='center_table'>
-		<% @post.file_count('image')[1].each do |attach| %>
-				<tr><td><div class='center_text'>
-				<%= link_to image_tag( attach.image.url(:thumb) ), attach.image.url, :target => '_blank' %>
-				<% if current_user.id == @post.user_id %>
-					<%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %>
-				<% end %>
-				<br><br></div></td></tr>
-		<% end %>
-		</table>
-	<% end %>
-
-	<% if @post.file_count('file')[0] > 0 %>
-	<b>Files</b><br><br><ol>
-		<% @post.file_count('file')[1].each.each do |attach| %>
-		<% attach.image_file_name.length > 14 ? link = attach.image_file_name[0..14] + '..' : link = attach.image_file_name %>
-				<li><code><%= link_to link, attach.image.url, :target => '_blank', :rel => "tooltip", :title => attach.image_file_name %></code>
-					<% if current_user.id == @post.user_id %>
-						  <%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %>
-					<% end %>
-				</li>
-		<% end %>
-	</ol>
-	<% end %>
-	
-	
-	<% if @post.file_count('url')[0] > 0 %>
-	<b>Links</b><br><br><ol>		
-			<% @post.file_count('url')[1].each do |attach| %>
-			<% attach.url.length > 14 ? link = attach.url[0..14] + '..' : link = attach.url %>
-				<li><code><%= link_to link, 'http://' + attach.url , :target => '_blank', :rel => "tooltip", :title => attach.url %></code>
-					<% if current_user.id == @post.user_id %>
-						  <%= link_to raw('<i class="icon-trash"></i>'), attach, method: :delete, data: { confirm: 'Are you sure?' } %>
-					<% end %>
-				</li>
-		<% end %>			
-	</ol>
-	<% end %>
-	
-  </div>
-
-<% end %>
-
- </div><!--/span-->
 
 </div><!--/row-->
 

@@ -22,7 +22,16 @@ function AddAttachment(Attach_url) {
 		
 </script>
 
-<%= link_to 'Discussion Home', posts_path , :class => 'btn btn-mini' %>
-<br><br>
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+	<form class="navbar-form">
+	<%= link_to 'Discussion Home', posts_path , :class => 'btn' %>
+	</form>
+    </ul>
+  </div>
+</div>
+
+
 <%= render 'show' %>
 
