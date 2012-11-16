@@ -1,8 +1,13 @@
 <div class="row">
   <div class="span3 offset1">
 	<ul class="breadcrumb">
-	  <li><%= link_to 'Home', start_path %> <span class="divider">/</span></li>
-	  <li class="active"><%= @type_is %></li>
+	  		<li><%= link_to 'Home', start_path %> <span class="divider">/</span></li>
+		<% if @type_is != nil %>
+	  		<li class="active"><%= @type_is %></li>
+		<% else %>
+			<li><%= link_to 'Discussion', posts_path(:type_is => 'Discussion') %> <span class="divider">/</span></li>
+			<li><%= link_to 'News', posts_path(:type_is => 'News') %> </li>
+		<% end %>
 	</ul>
   </div>
   <div class='span8'>
