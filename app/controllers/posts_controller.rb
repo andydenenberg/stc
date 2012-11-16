@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     authorize! :new, @user, :message => 'Not authorized as an administrator.'
-    @item_type = params[:item_type]
+    @type_is = params[:type_is]
     @post = Post.new
     @post.attachments.build
     
@@ -58,6 +58,7 @@ class PostsController < ApplicationController
   def edit
     authorize! :edit, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
+    @type_is = params[:type_is]
     
   end
 

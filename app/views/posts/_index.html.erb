@@ -13,8 +13,23 @@
 					</div>
 					<div class='span5'>
 						<% if post.attachments.count > 0 %>
-			    		<%= post.attachments.first.description.html_safe %>
+							<b>Attachments</b>
+						<ol>
+						<% post.attachments.each_with_index do |attach| %>
+							<li>
+							<% if !attach.url.blank? %>
+								<code>Link: <%= link_to attach.url, "http://" + attach.url, :target => '_blank' %></code>
+							<% end %>
+							<% if !attach.image.url.include?('missing.png') %>
+							<code>File: <%= link_to attach.image_file_name, attach.image.url, :target => '_blank' %></code>
+							<% end %>
+							<%= attach.description.html_safe %>
+							</li>
+							<% end %> 
 						<% end %>
+						
+						<%= body %><br>
+						
 					</div>
 					<br>
 				</div>

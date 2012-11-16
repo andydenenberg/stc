@@ -1,10 +1,10 @@
-<%= link_to_function 'Add Comment', "AddComment(" + @post.id.to_s + "); return false", :class => 'btn btn-primary btn-mini', :id => 'add_comment_button' %>
-<br><br>
-
-<% @post.comments.each do |c| %>
-
 <div class='row'>
-	<div class='span9'>
+	<div class='span9 offset1'>
+		<%= link_to_function 'Add Comment', "AddComment(" + @post.id.to_s + "); return false", :class => 'btn btn-primary btn-mini', :id => 'add_comment_button' %>
+		<br><br>
+
+	<% @post.comments.each do |c| %>
+
 		<blockquote>
 			<%= c.note.html_safe %>
 			<br><br>
@@ -14,10 +14,9 @@
 			    <%= link_to 'Edit', modify_comment_path(c) %> |
 			    <%= link_to 'Remove', c, method: :delete, data: { confirm: 'Are you sure?' } %> 
 			<% end %>
-		</blockquote>
-		<br>	
-<hr>
+		</blockquote><br>
+		<hr>
+	<% end %>
+	
 	</div>
 </div>
-
-<% end %>
