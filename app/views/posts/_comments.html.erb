@@ -1,4 +1,4 @@
-<%= link_to_function 'Add Comment', "AddComment(); return false", :class => 'btn btn-primary btn-mini' %>
+<%= link_to_function 'Add Comment', "AddComment(" + @post.id.to_s + "); return false", :class => 'btn btn-primary btn-mini', :id => 'add_comment_button' %>
 <br><br>
 
 <% @post.comments.each do |c| %>

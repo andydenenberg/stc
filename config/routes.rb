@@ -11,10 +11,9 @@ Stc::Application.routes.draw do
     collection do
       get 'add_comment'
       get 'add_attachment'
-      get 'search'
     end
   end
-  
+    
   authenticated :user do
 #    root :to => 'home#index'
     root :to => 'home#events'

@@ -3,19 +3,19 @@
 <div class='row'>
 	<div class='span6'>
 		<div class='introbox'>
-	    	<h4>Welcome to our Collaboration</h4>
-	    	<p>A place to store information and collect ideas on how best to help our two schools and their students achieve their fullest potential.</p>
-			<p><%= link_to 'Join the Discussion &raquo;'.html_safe, posts_path , :class => "btn btn-small btn-success" %></p>
+	    	<h4><%= link_to 'Welcome to our Collaboration', posts_path(:type_is => 'Discussion') %></h4><br>
+	    	<p>A place collect ideas and information on how best to help our two schools and their students achieve their fullest potential.</p><br>
+			<p><%= link_to 'Join the Discussion &raquo;'.html_safe, posts_path(:type_is => 'Discussion') , :class => "btn btn-small btn-success" %></p>
 		</div>		    
 	</div>
 	
 	<div class='span6'>
 		<div class='introbox'>
-			<h4>News</h4>
+			<h4><%= link_to 'News', posts_path(:type_is => 'News') %></h4>
 			<% @news.each do |post| %>
-	    	<b><em style='font-size:16px;'><%= link_to post.title, post_path(post) %></em></b>
+	    	<b><em style='font-size:16px;'><%= link_to post.title, post_path(post, :type_is => 'News') %></em></b>
 	    	<p><%= post.attachments.first.description.html_safe %>
-			   <code><%= link_to 'Read Item', post_path(post) %></code> |
+			   <code><%= link_to 'Read Item', post_path(post, :type_is => 'News') %></code> |
  					 <%= post.created_at.strftime('%b-%d-%Y') %></p>
 	
 	<hr>

@@ -5,9 +5,9 @@
 				<div class='row introbox  offset1' style='min-height: 110px;'>
 					<div class='span4'>
 							<div class='lead' style='border-bottom:thin dotted #000000;
-							}'><%= link_to post.title, post %></div>
+							}'><%= link_to post.title, post_path(post, :type_is => @type_is) %></div>
 							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %> |
-							Comments: <%= post.comments.count %> | 
+							Comments: <%= post.comments.count %> | <%= post.id %>
 							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small><br><br>
 							
 					</div>

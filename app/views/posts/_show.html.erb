@@ -1,37 +1,23 @@
 
 <div class="row">
-  <div class="span9 offset1">
-	<% current_user.id != @post.user_id ? box = 'blank_box' : box = 'message_box' %>
-	  <div class="<%= box %>">
-		<% if current_user.id == @post.user_id %>
-
-		<div class="btn-group left_corner">
-		  <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
-		    Edit Message
-		    <span class="caret"></span>
-		  </a>
-		  <ul class="dropdown-menu">
-			<%= link_to 'Edit', edit_post_path(@post) %>
-			<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
-		  </ul>
-		</div>
-
-
-		<% end %>
+  <div class="span10 offset1">
+	  <div class='blank_box'>
 		
 		<div class='lead' style='border-bottom:thin dotted #000000;'><%= link_to @post.title, @post %></div>
 
 <% if @post.attachments.count > 0 %>
-	<%= @post.attachments.first.description.html_safe %><br>
-	<br><b>Attachments:</b>
-	<% if @post.file_count('url')[0] > 0 %>
-	<code><%= link_to @post.attachments.first.image_file_name, "http://" + @post.attachments.first.url, :target => '_blank' %></code><br>
+	<b>Attachments</b>
+<ol>
+<% @post.attachments.each_with_index do |attach| %>
+	<li>
+	<% if !attach.url.blank? %>
+		<code>Link: <%= link_to attach.url, "http://" + attach.url, :target => '_blank' %></code>
 	<% end %>
-	<% if @post.file_count('file')[0] > 0 %>
-	<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
-	<% end %> 
-	<% if @post.file_count('image')[0] > 0 %>
-	<code><%= link_to @post.attachments.first.image_file_name, @post.attachments.first.image.url, :target => '_blank' %></code><br>
+	<% if !attach.image.url.include?('missing.png') %>
+	<code>File: <%= link_to attach.image_file_name, attach.image.url, :target => '_blank' %></code>
+	<% end %>
+	<%= attach.description.html_safe %>
+	</li>
 	<% end %> 
 <% end %>
 <br>
@@ -43,6 +29,11 @@
 	
 
 	<div class='row pull-right'>
+		<% if current_user.id == @post.user_id %>
+			<%= link_to_function 'Add Attachment', "AddAttachment(" + @post.id.to_s + "); return false", :class => 'btn btn-mini btn-primary' %>			<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-mini' %>
+			<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
+		<% end %>
+		
 	Created by: <b><%= User.find(@post.user_id).name %></b> on <%= @post.created_at.strftime('%b %d, %Y') %>
 	</div><br>
 	    

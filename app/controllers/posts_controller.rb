@@ -1,52 +1,30 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
-  
-#  def add_attachment
-#    authorize! :add_attachment, @user, :message => 'Not authorized as an administrator.'
-#    @post = Post.find(params[:post])
-#    @attachment = Attachment.new
-#    @user = current_user
-#    @attach_url = params[:attach_url]
-#    render :partial => 'add_attachment', :layout => false    
-#  end
-#
-#  def add_comment
-#    authorize! :add_comment, @user, :message => 'Not authorized as an administrator.'
-#    @post = Post.find(params[:post])
-#    @comment = Comment.new
-#    @user = current_user
-#    render :partial => 'add_comment', :layout => false    
-#  end
-  
-  def search
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    if params[:type_is] == 'Show Discussions & News' 
-      type_is = '' 
-    elsif params[:type_is] == 'Show Discussion' 
-      type_is = 'type_is = "discussion"' 
-    elsif params[:type_is] == 'Show News' 
-      type_is = 'type_is = "news"' 
-    end
-    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 5)
-    
-    render :partial => 'index', :layout => false       
+ 
+  def add_comment
+    authorize! :add_comment, @user, :message => 'Not authorized as an administrator.'
+    @post = Post.find(params[:post])
+    @post.comments.new
+    render :partial => 'add_comment', :layout => false    
   end
-  
+
+  def add_attachment
+    authorize! :add_attachment, @user, :message => 'Not authorized as an administrator.'
+    @post = Post.find(params[:post])
+    @post.attachments.new
+    render :partial => 'add_attachments', :layout => false    
+  end
+    
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-#    @posts = Post.paginate(:page => params[:page], :per_page => 3)
-    params[:type_is] ||= 'All'
-    if params[:type_is] == 'All' 
+    if params[:type_is] == 'Discussions & News' or params[:type_is] == nil
       type_is = '' 
-    else
+    else 
       type_is = 'type_is = "' + params[:type_is] + '"' 
     end
-    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 5)
+    @type_is = params[:type_is]
+    @posts = Post.where(type_is).paginate(:page => params[:page], :per_page => 5).order('created_at desc')
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
   end
 
   # GET /posts/1
@@ -54,6 +32,7 @@ class PostsController < ApplicationController
   def show
     authorize! :show, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
+    @type_is = params[:type_is]
 
     respond_to do |format|
       format.html # show.html.erb
@@ -79,7 +58,6 @@ class PostsController < ApplicationController
   def edit
     authorize! :edit, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
-    @item_type = @post.type_is
     
   end
 
