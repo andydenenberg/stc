@@ -11,8 +11,8 @@
 			<div class='pull-right'>
 			<b><%= User.find(c.user_id).name %></b> on <%= c.created_at.strftime('%b %d, %Y') %>
 			<% if current_user.id == c.user_id %> |
-			    <%= link_to 'Edit', modify_comment_path(c) %> |
-			    <%= link_to 'Remove', c, method: :delete, data: { confirm: 'Are you sure?' } %> 
+			    <%= link_to 'Edit', modify_comment_path(c), :class => 'btn btn-mini' %> |
+			    <%= link_to 'Remove', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %> 
 			<% end %>
 		</blockquote><br>
 		<hr>

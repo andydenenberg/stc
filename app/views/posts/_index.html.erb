@@ -8,7 +8,8 @@
 							}'><%= link_to post.title, post_path(post, :type_is => @type_is) %></div>
 							<small><%= User.find(post.user_id).name %> on <%= post.created_at.strftime('%b-%d-%Y') %> |
 							Comments: <%= post.comments.count %> | <%= post.id %>
-							<span class="<%= type_color(post.type_is) %>"><%= post.type_is %></span></small><br><br>
+							<span class="<%= type_color(post.type_is) %>">
+							<%= link_to 'Read ' + post.type_is, post_path(post, :type_is => @type_is), :style => 'color:white;' %></span></small><br><br>
 							
 					</div>
 					<div class='span5'>
