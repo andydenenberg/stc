@@ -2,21 +2,18 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!
  
   def add_comment
-    authorize! :add_comment, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:post])
     @post.comments.new
     render :partial => 'add_comment', :layout => false    
   end
 
   def add_attachment
-    authorize! :add_attachment, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:post])
     @post.attachments.new
     render :partial => 'add_attachments', :layout => false    
   end
     
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     if params[:type_is] == 'Discussions & News' or params[:type_is] == nil
       type_is = '' 
     else 
@@ -30,7 +27,6 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    authorize! :show, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
     @type_is = params[:type_is]
 
@@ -43,7 +39,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    authorize! :new, @user, :message => 'Not authorized as an administrator.'
     @type_is = params[:type_is]
     @post = Post.new
     @post.attachments.build
@@ -56,7 +51,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    authorize! :edit, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
     @type_is = params[:type_is]
     
@@ -65,7 +59,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    authorize! :create, @user, :message => 'Not authorized as an administrator.'
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -82,7 +75,6 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -99,7 +91,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     @post = Post.find(params[:id])
     @post.destroy
 
