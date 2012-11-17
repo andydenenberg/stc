@@ -2,9 +2,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!, :except => :welcome
   layout :choose_layout
 
-  def reference
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    
+  def media    
   end
   
   def donate
