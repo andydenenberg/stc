@@ -21,12 +21,12 @@ Stc::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"  
 
-     mail_cred = YAML.load(File.read('../../../Desktop/config.yml'))   
+#     mail_cred = YAML.load(File.read('../../../Desktop/config.yml'))   
 
      config.action_mailer.smtp_settings = {
 
-    :user_name =>  mail_cred['user_name'],
-    :password => mail_cred['password'],
+#    :user_name =>  mail_cred['user_name'],
+#    :password => mail_cred['password'],
 
     :domain => "ospreypointpartners.com",
     :address => "smtp.sendgrid.net",
